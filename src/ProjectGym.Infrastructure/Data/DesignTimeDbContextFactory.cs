@@ -1,10 +1,11 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace ProjectGym.Infrastructure.Data;
 
-public class DesignTimeDbContextFactory
+public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ProjectGymDbContext>
 {
      public ProjectGymDbContext CreateDbContext(string[] args)
     {

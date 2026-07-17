@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProjectGym.API\ProjectGym.API.csproj" />
     <ProjectReference Include="..\ProjectGym.Application\ProjectGym.Application.csproj" />
     <ProjectReference Include="..\ProjectGym.Domain\ProjectGym.Domain.csproj" />
   </ItemGroup>
@@ -24,7 +23,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.9" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.7" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
   </ItemGroup>
 
 </Project>
