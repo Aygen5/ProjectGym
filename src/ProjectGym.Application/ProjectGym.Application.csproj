@@ -10,6 +10,10 @@
     <ProjectReference Include="..\ProjectGym.Domain\ProjectGym.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="1.1.0.118" />
+  </ItemGroup>
+
 
 
 </Project>
