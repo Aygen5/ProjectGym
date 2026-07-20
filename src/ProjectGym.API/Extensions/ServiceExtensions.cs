@@ -15,6 +15,7 @@ using ProjectGym.Domain.Interfaces;
 using ProjectGym.Infrastructure.Data;
 using ProjectGym.Infrastructure.Identity;
 using ProjectGym.Infrastructure.Repositories;
+using ProjectGym.Infrastructure.Services;
 
 namespace ProjectGym.API.Extensions;
 
@@ -47,7 +48,7 @@ public static class ServiceExtensions
         .AddEntityFrameworkStores<ProjectGymDbContext>()
         .AddDefaultTokenProviders();
 
-        //services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IAuthService, AuthService>();
         return services;
     }
 

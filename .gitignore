@@ -480,3 +480,12 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# ProjectGym Custom Rules
+# Ensure Postman folder and its contents are tracked
+!postman/
+!postman/**
+
+# Ignore local developer settings overrides
+appsettings.local.json
+appsettings.Development.json
