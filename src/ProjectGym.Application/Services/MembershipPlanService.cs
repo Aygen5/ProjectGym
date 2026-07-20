@@ -1,23 +1,28 @@
 using System;
-using System.IO.Pipelines;
+using AutoMapper;
+using ProjectGym.Application.DTOs.Common;
+using ProjectGym.Application.DTOs.MembershipPlan;
+using ProjectGym.Application.Interfaces;
+using ProjectGym.Domain.Entities;
+using ProjectGym.Domain.Enums;
+using ProjectGym.Domain.Interfaces;
 
 namespace ProjectGym.Application.Services;
 
 public class MembershipPlanService : IMembershipPlanService
 {
+
     private readonly IUnitOfWork _uow;
     private readonly IMapper _mapper;
 
-
-public MembershipPlanService(IUnitOfWork uow, IMapper mapper)
+    public MembershipPlanService(IUnitOfWork uow, IMapper mapper)
     {
         _uow = uow;
         _mapper = mapper;
     }
-
-    public async Task<ReadResult<MembershipPlanDto>> CreateAsync(CreateMembershipPlanDto dto, CancellationToken cancellationToken=default)
+    public async Task<Result<MembershipPlanDto>> CreateAsync(CreateMembershipPlanDto dto, CancellationToken cancellationToken = default)
     {
-        var duplicate = await _uow.MembershipPlans.FirstOrDefaultAsync(p=>p.Name.ToLower()==dto.Name.ToLower(), cancellationToken);
+       var duplicate = await _uow.MembershipPlans.FirstOrDefaultAsync(p=>p.Name.ToLower()==dto.Name.ToLower(), cancellationToken);
         if(duplicate is not null)
         {
             return Result<MembershipPlanDto>.Conflict($"'{dto.Name}' adında bir üyelik planı zaten mevcut.");
@@ -26,9 +31,8 @@ public MembershipPlanService(IUnitOfWork uow, IMapper mapper)
         await _uow.MembershipPlans.AddAsync(plan, cancellationToken);
         await _uow.SaveChangesAsync(cancellationToken);
 
-        return Task <Result<MembershipPlanDto>>.Success(_mapper.Map<MembershipPlanDto>(plan));
+        return Result<MembershipPlanDto>.Success(_mapper.Map<MembershipPlanDto>(plan));
     }
-
 
     public async Task<Result<bool>> DeleteAsync(int id, CancellationToken cancellationToken = default)
     {
@@ -115,5 +119,4 @@ public MembershipPlanService(IUnitOfWork uow, IMapper mapper)
 
         return Result<MembershipPlanDto>.Success(_mapper.Map<MembershipPlanDto>(plan));
     }
-
 }

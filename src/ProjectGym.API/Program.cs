@@ -13,6 +13,13 @@ builder.Services.AddControllers(options =>
 builder.Services.AddOpenApi();
 
 
+builder.Services.AddDatabase(builder.Configuration);
+builder.Services.AddIdentityServices();
+builder.Services.AddJwtAuthentication(builder.Configuration);
+builder.Services.AddRepositories();
+builder.Services.AddApplicationServices();
+builder.Services.AddCorsPolicy(builder.Configuration);
+
 
 var app = builder.Build();
 
