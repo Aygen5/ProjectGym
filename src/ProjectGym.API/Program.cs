@@ -1,23 +1,23 @@
 using Microsoft.AspNetCore.Identity;
 using ProjectGym.API.Extensions;
+using ProjectGym.API.Filters;
 using ProjectGym.Infrastructure.Data;
 using ProjectGym.Infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ApiResponseFilter>();
+});
 builder.Services.AddOpenApi();
 
-builder.Services.AddDatabase(builder.Configuration);
-builder.Services.AddIdentityServices();
-builder.Services.AddRepositories();
+
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
     app.MapOpenApi();
     using var scope = app.Services.CreateScope();
     var services = scope.ServiceProvider;
